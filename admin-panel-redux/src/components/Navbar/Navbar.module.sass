@@ -1,0 +1,50 @@
+.nav
+  width: 250px
+  height: 100%
+  display: flex
+  justify-content: space-between
+  background: white
+  position: fixed
+
+.openBtn
+  position: fixed
+  top: 0
+  left: 0
+
+  &Enter
+    transform: translateX(-50px)
+
+    &Active
+      transform: translateX(0)
+      transition: transform 500ms
+
+  &Exit
+    transform: translateX(0)
+
+    &Active
+      transform: translateX(-50px)
+      transition: transform 500ms
+
+.links
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  width: 100%
+
+  &Enter
+    transform: translateX(-800px)
+
+    &Active
+      transform: translateX(0)
+      transition: transform 500ms
+
+  &Exit
+    transform: translateX(0)
+
+    &Active
+      transform: translateX(-800px)
+      transition: transform 500ms
+
+@media(max-width: 768px)
+  .nav
+    width: 100vw

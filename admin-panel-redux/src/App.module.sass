@@ -1,0 +1,26 @@
+.appWrapper
+  display: flex
+
+.navbar
+  &.wrapper
+    width: 250px
+    min-height: 100%
+    overflow-y: auto
+    display: flex
+    position: fixed
+    z-index: 100
+
+.pagePanel
+  width: 100%
+  min-height: 100%
+  overflow-y: auto
+  margin-left: 250px
+  transition: margin-left .5s
+  z-index: 1
+
+  &.fullScreen
+    margin-left: 0px
+
+@media(max-width: 768px)
+  .pagePanel
+    margin-left: 0

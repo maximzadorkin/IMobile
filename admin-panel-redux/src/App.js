@@ -1,11 +1,11 @@
-import Navbar from './components/Navbar/Navbar'
+import Navbar from './components/AdminNavbar/Navbar'
 import {setActiveNavTab, setNavbarShowState} from './store/actions/navigation'
 import {connect} from 'react-redux'
 import {Route, Switch} from 'react-router-dom'
-import Auth from './containers/Auth/Auth'
+import Auth from './containers/AdminPanel/Auth/Auth'
 import styles from './App.module.sass'
 import {BASIC_URL, protocol, urls} from './utils/api'
-import Attributes from './containers/Attributes/Attributes'
+import Attributes from './containers/AdminPanel/Attributes/Attributes'
 import {domain} from './utils/api'
 
 function App(props) {
@@ -28,15 +28,7 @@ function App(props) {
                 }
             </div>
             <div className={`${styles.pagePanel} ${!props.showNavbar && styles.fullScreen}`}>
-                <Switch>
-                    <Route to={urls.CRM} exact component={Auth}/>
-                    <Route path={urls.ATTRIBUTES} exact component={Attributes}/>
-                    <Route path={urls.ADD_PRODUCT} exact component={Auth}/>
-                    <Route path={urls.ABOUT} exact component={Auth}/>
-                    <Route path={urls.PERSONAL_INFORMATION} exact component={Auth}/>
-                    <Route path={urls.AUTH} exact component={Auth}/>
-                    <Route path={BASIC_URL} exact/>
-                </Switch>
+
             </div>
         </div>
     )

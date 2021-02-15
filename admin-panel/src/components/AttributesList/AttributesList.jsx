@@ -1,31 +1,42 @@
-import {Box, Button, TextField} from '@material-ui/core'
+import {Box, Button, List, TextField} from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
 import Attribute from './Attribute/Attribute'
 import uniqid from 'uniqid'
 
 const AttributesList = ({attributes}) => (
-    <Box
-        display='flex'
-        flexDirection='column'
-        justifyContent='center'
-        // width='320px'
-    >
-        {
-            attributes.map(attr =>
-                <Attribute
-                    attr={attr}
-                    key={uniqid()}
-                />
-            )
-        }
-        <form>
+    <Box maxWidth={1} width='350px'>
+        <Box
+            height={400}
+            overflow='auto'
+            mb={2}
+        >
+            <List>
+                {
+                    attributes.map(attr =>
+                        <Attribute
+                            attr={attr}
+                            key={uniqid()}
+                        />
+                    )
+                }
+            </List>
+        </Box>
+        <Box
+            display='flex'
+            justifyContent='space-between'
+        >
             <TextField
-                label="Новый атрибут"
-                variant="outlined"
+                label='Новый атрибут'
+                variant='outlined'
+                fullWidth={true}
             />
-            <Button>
-                +
+            <Button
+                variant='outlined'
+                color='primary'
+            >
+                <AddIcon color="primary" />
             </Button>
-        </form>
+        </Box>
     </Box>
 )
 

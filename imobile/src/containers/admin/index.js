@@ -1,16 +1,30 @@
 import {Route, Switch} from 'react-router-dom'
 import LogIn from './LogIn/LogIn'
+import AdminNavbar from './AdminNavbar/AdminNavbar'
+import {connect} from 'react-redux'
+import Actions from '../../store/actions'
 
-const AdminPanel = () => {
+const AdminPanel = (props) => {
     return (
-        <Switch>
-            <Route
-                path='/admin/login'
-                component={LogIn}
-                exact
-            />
-        </Switch>
+        <>
+            {props.haveToken && <AdminNavbar/>}
+            <Switch>
+                {
+                    props.haveToken ? null :
+                        <Route
+                            path='/admin'
+                            component={LogIn}
+                        />
+                }
+            </Switch>
+        </>
     )
 }
 
-export default AdminPanel
+const mapStateToProps = state => ({
+    haveToken: Actions.getJWT()
+})
+
+const mapDispatchToProps = dispatch => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPanel)

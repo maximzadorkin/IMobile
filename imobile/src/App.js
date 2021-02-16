@@ -1,6 +1,7 @@
 import {Switch, Route} from 'react-router-dom'
 import AdminPanel from './containers/admin'
 import {Box} from '@material-ui/core'
+import pagesPathnames from './utils/pagesPathnames'
 
 const App = () => (
     <Box
@@ -13,11 +14,11 @@ const App = () => (
     >
         <Switch>
             <Route
-                path='/admin'
+                path={pagesPathnames.ADMIN}
                 component={AdminPanel}
             />
             <Route
-                path='/'
+                path={pagesPathnames.MAIN}
                 component={() => <div>Main page</div>}
             />
         </Switch>

@@ -8,6 +8,9 @@ import {applyMiddleware, createStore} from 'redux'
 import rootReducer from './store/reducers'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
+import {createBrowserHistory} from 'history'
+
+export const history = createBrowserHistory()
 
 const store = createStore(
     rootReducer,
@@ -16,7 +19,8 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter >
+            {/*history={history}>*/}
             {/*<React.StrictMode>*/}
                 <App/>
             {/*</React.StrictMode>*/}

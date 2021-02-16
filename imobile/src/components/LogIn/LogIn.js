@@ -9,14 +9,13 @@ const TEXTS = {
     PASSWORD_ERROR: 'Вы не ввели пароль',
     BUTTON_LOG_IN: 'Войти',
     FETCH_ERROR: {
-        PASS: 'password',
         NETWORK: 'network',
-        PASS_TEXT: 'Вы ввели неверные данные',
+        TEXT: 'Вы ввели неверные данные',
         NETWORK_TEXT: 'Проблемы с сетью. Попробуйте позже'
     }
 }
 
-const LogIn = ({logIn, error, loading}) => {
+const LogIn = ({logIn, error, logInError, loading}) => {
     const [email, setEmail] = useState({
         value: '',
         isValid: false
@@ -57,7 +56,7 @@ const LogIn = ({logIn, error, loading}) => {
                     <form onSubmit={(e) => e.preventDefault()}>
                         <Box mb={3}>
                             <Typography
-                                variant='h4'
+                                variant='h5'
                                 component='h1'
                                 align='center'
                                 mb='5rem'
@@ -97,12 +96,14 @@ const LogIn = ({logIn, error, loading}) => {
                                     <Typography
                                         color='secondary'
                                         variant='body2'
+                                        align='center'
                                     >
                                         {
+                                            error &&
                                             error === TEXTS.FETCH_ERROR.NETWORK
                                                 ? TEXTS.FETCH_ERROR.NETWORK_TEXT
-                                                : error === TEXTS.FETCH_ERROR.PASS
-                                                ? TEXTS.FETCH_ERROR.PASS_TEXT
+                                                : error && error === logInError
+                                                ? TEXTS.FETCH_ERROR.TEXT
                                                 : null
                                         }
                                     </Typography>

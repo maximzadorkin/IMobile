@@ -1,15 +1,27 @@
 import LogInRender from '../../../components/LogIn/LogIn'
 import {connect} from 'react-redux'
 import Actions from '../../../store/actions'
+import Errors from '../../../utils/Errors'
+import {history} from '../../../index'
+import pagesPathnames from '../../../utils/pagesPathnames'
+import {Component} from 'react'
 
-const LogIn = (props) => {
-    return (
-        <LogInRender
-            logIn={props.logIn}
-            error={props.error}
-            loading={props.loading}
-        />
-    )
+class LogIn extends Component {
+
+    componentDidMount() {
+        history.push(pagesPathnames.ADMIN)
+    }
+
+    render() {
+        return (
+            <LogInRender
+                logIn={this.props.logIn}
+                error={this.props.error}
+                logInError={Errors.INVALID_AUTH_ERROR}
+                loading={this.props.loading}
+            />
+        )
+    }
 }
 
 const mapStateToProps = state => ({

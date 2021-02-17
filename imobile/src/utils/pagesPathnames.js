@@ -1,5 +1,6 @@
 const pagesPathnames = {
     CRM: '/admin/crm',
+    VENDORS: '/admin/vendors',
     ATTRS: '/admin/attrs',
     PRODUCTS: '/admin/products',
     CONTACTS: '/admin/contacts',

@@ -3,6 +3,8 @@ import LogIn from './LogIn/LogIn'
 import AdminNavbar from './AdminNavbar/AdminNavbar'
 import {connect} from 'react-redux'
 import Actions from '../../store/actions'
+import pagesPathnames from '../../utils/pagesPathnames'
+import Vendors from './Vendors/Vendors'
 
 const AdminPanel = (props) => {
     return (
@@ -16,6 +18,15 @@ const AdminPanel = (props) => {
                             component={LogIn}
                         />
                 }
+                <Route
+                    path={pagesPathnames.VENDORS}
+                    component={Vendors}
+                    exact
+                />
+                <Route
+                    path={pagesPathnames.ADMIN}
+                    component={() => <div></div>}
+                />
             </Switch>
         </>
     )

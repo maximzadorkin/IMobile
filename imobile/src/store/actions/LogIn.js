@@ -4,6 +4,7 @@ import Errors from '../../utils/Errors'
 import uniqid from 'uniqid'
 import * as CryptoJS from 'crypto-js'
 import {history} from '../../index'
+import pagesPathnames from '../../utils/pagesPathnames'
 
 export const successLogIn = () => ({
     type: ActionTypes.SUCCESS_LOG_IN
@@ -46,7 +47,7 @@ export const LogIn = (email, password) =>
                 dispatch(errorLogIn(false))
                 dispatch(successLogIn())
                 dispatch(setLoadingStateLogIn(false))
-                history.push('/admin')
+                history.push(pagesPathnames.CRM)
             })
             .catch(err => {
                 const INVALID_AUTH_ERROR = 401

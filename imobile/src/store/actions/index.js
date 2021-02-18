@@ -1,5 +1,6 @@
 import {deleteJWT, errorLogIn, getJWT, LogIn, logOut, setLoadingStateLogIn, successLogIn} from './LogIn'
 import {changePath} from './navigation'
+import {addVendor, deleteVendor, errorAddingAVendor, fetchVendors} from './vendors'
 
 const Actions = {
     successLogIn,
@@ -9,7 +10,11 @@ const Actions = {
     logOut,
     getJWT,
     deleteJWT,
-    changePath
+    changePath,
+    fetchVendors,
+    deleteVendor,
+    addVendor,
+    errorAddingAVendor
 }
 
 export default Actions

@@ -1,113 +1,40 @@
-import {
-    Box, Button,
-    Container,
-    IconButton,
-    List,
-    ListItem,
-    ListItemSecondaryAction,
-    ListItemText,
-    Paper, TextField, Typography
-} from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
-import AddIcon from '@material-ui/icons/Add'
-import CloudUploadIcon from '@material-ui/icons/CloudUpload'
-import {PhotoCamera} from '@material-ui/icons'
+import {connect} from 'react-redux'
+import Vendors from '../../../components/Vendors/Vendors'
+import Actions from '../../../store/actions'
+import {Component} from 'react'
 
-const TEXTS = {
-    ADD_NEW_VENDOR: 'Добавить нового производителя',
-    NEW_VENDOR: 'Именование'
+class VendorsContainer extends Component {
+    componentDidMount() {
+        this.props.fetchVendors()
+    }
+
+    render() {
+        return (
+            <Vendors
+                vendors={this.props.vendors}
+                deleteVendor={this.props.deleteVendor}
+                addVendor={this.props.addVendor}
+                uploadingNewVendor={this.props.uploadingNewVendor}
+                fetchVendorsLoading={this.props.fetchVendorsLoading}
+                errorAddingAVendor={this.props.errorAddingAVendor}
+                deleteErrorAddingAVendor={this.props.deleteErrorAddingAVendor}
+            />
+        )
+    }
 }
 
-const Vendors = (props) => {
-    return (
-        <Box pt={5} ml='320px'>
-            <Container maxWidth="md">
-                <Box mb={1}>
-                    <form submit={e => e.preventDefault()}>
-                        <Typography>{TEXTS.ADD_NEW_VENDOR}</Typography>
-                        <TextField label={TEXTS.NEW_VENDOR} variant='outlined'/>
-                        <IconButton color="primary" aria-label="upload picture" component="span">
-                            <PhotoCamera />
-                        </IconButton>
-                        <IconButton type='submit' color='primary' onClick={() => {}}>
-                            <AddIcon />
-                        </IconButton>
-                    </form>
-                </Box>
-                <Paper variant="outlined">
-                    <List>
-                        <ListItem  divider>
-                            <ListItemText primary="Single-line item" />
-                            <ListItemSecondaryAction>
-                                <IconButton size="small">
-                                    <EditIcon/>
-                                </IconButton>
-                                <IconButton size="small">
-                                    <DeleteIcon color='secondary'/>
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem button divider>
-                            <ListItemText primary="Single-line item" />
-                            <ListItemSecondaryAction>
-                                <IconButton size="small">
-                                    <EditIcon/>
-                                </IconButton>
-                                <IconButton size="small">
-                                    <DeleteIcon color='secondary'/>
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem button divider>
-                            <ListItemText primary="Single-line item" />
-                            <ListItemSecondaryAction>
-                                <IconButton size="small">
-                                    <EditIcon/>
-                                </IconButton>
-                                <IconButton size="small">
-                                    <DeleteIcon color='secondary'/>
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem><ListItem button divider>
-                        <ListItemText primary="Single-line item" />
-                        <ListItemSecondaryAction>
-                            <IconButton size="small">
-                                <EditIcon/>
-                            </IconButton>
-                            <IconButton size="small">
-                                <DeleteIcon color='secondary'/>
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                        <ListItem button divider>
-                            <ListItemText primary="Single-line item" />
-                            <ListItemSecondaryAction>
-                                <IconButton size="small">
-                                    <EditIcon/>
-                                </IconButton>
-                                <IconButton size="small">
-                                    <DeleteIcon color='secondary'/>
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                        <ListItem button divider>
-                            <ListItemText primary="Single-line item" />
-                            <ListItemSecondaryAction>
-                                <IconButton size="small">
-                                    <EditIcon/>
-                                </IconButton>
-                                <IconButton size="small">
-                                    <DeleteIcon color='secondary'/>
-                                </IconButton>
-                            </ListItemSecondaryAction>
-                        </ListItem>
+const mapStateToProps = state => ({
+    vendors: state.vendors.vendors,
+    uploadingNewVendor: state.vendors.uploadingNewVendor,
+    fetchVendorsLoading: state.vendors.fetchVendorsLoading,
+    errorAddingAVendor: state.vendors.errorAddingAVendor
+})
 
-                    </List>
-                </Paper>
-            </Container>
-        </Box>
-    )
-}
+const mapDispatchToProps = dispatch => ({
+    fetchVendors: () => dispatch(Actions.fetchVendors()),
+    deleteVendor: vendor => dispatch(Actions.deleteVendor(vendor)),
+    addVendor: (vendor, vendors) => dispatch(Actions.addVendor(vendor, vendors)),
+    deleteErrorAddingAVendor: () => dispatch(Actions.errorAddingAVendor(false, ''))
+})
 
-export default Vendors
+export default connect(mapStateToProps, mapDispatchToProps)(VendorsContainer)

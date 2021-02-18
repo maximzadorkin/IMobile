@@ -10,7 +10,7 @@ const Loading = ({fullSize}) => {
             right={fullSize && 0}
             height={!fullSize && '100%'}
             width={!fullSize && '100%'}
-            zIndex={110}
+            zIndex={120}
         >
             <Fade in={true} timeout={1000}>
                 <Box

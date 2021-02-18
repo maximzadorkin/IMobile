@@ -1,0 +1,27 @@
+$animationSpeed: .3s
+$navbarWidth: 320px
+
+.wrapper
+  &.container
+    margin-top: 5px
+    margin-left: $navbarWidth
+    transition: margin-left $animationSpeed
+    &.close
+      margin-left: 0px
+  &.navbar
+    position: absolute
+    width: $navbarWidth
+    height: 100%
+    display: flex
+    justify-content: space-between
+    transition: transform $animationSpeed
+    background: white
+    z-index: 10000
+    &.close
+      transform: translateX(-$navbarWidth)
+
+@media (max-width: 768px)
+  $navbarWidth: 100%
+  &.wrapper
+    &.container
+      margin-left: 0

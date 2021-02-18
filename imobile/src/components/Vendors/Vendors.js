@@ -16,8 +16,8 @@ const Vendors = ({
                  }) => {
     return (
         <Fade in={true}>
-            <Box pt={5} ml='320px'>
-                <Container maxWidth='md'>
+            <Box pt={5}>
+                <Container>
                     <Box position='relative'>
                         {uploadingNewVendor && <Loading/>}
                         <AddVendor

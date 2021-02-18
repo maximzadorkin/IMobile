@@ -78,7 +78,10 @@ const AddVendor = ({
                                     component='span'
                                     disabled={uploadingNewVendor}
                                 >
-                                    {!fileValue.name ? TEXTS.ADD_PHOTO : TEXTS.REPLACE_PHOTO}
+                                    {
+                                        window.innerWidth > 768 &&
+                                        (!fileValue.name ? TEXTS.ADD_PHOTO : TEXTS.REPLACE_PHOTO)
+                                    }
                                 </Button>
                             </label>
                         </Box>

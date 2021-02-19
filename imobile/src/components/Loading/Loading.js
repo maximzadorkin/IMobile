@@ -21,7 +21,7 @@ const Loading = ({fullSize}) => {
                     alignItems='center'
                     bgcolor='rgba(11, 11, 11, 0.3)'
                 >
-                    <CircularProgress color='secondary'/>
+                    <CircularProgress color='primary'/>
                 </Box>
             </Fade>
         </Box>

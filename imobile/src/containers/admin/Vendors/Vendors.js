@@ -4,7 +4,8 @@ import Actions from '../../../store/actions'
 import {Component} from 'react'
 
 class VendorsContainer extends Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props)
         this.props.fetchVendors()
     }
 
@@ -12,12 +13,17 @@ class VendorsContainer extends Component {
         return (
             <Vendors
                 vendors={this.props.vendors}
-                deleteVendor={this.props.deleteVendor}
+                fetchVendorsLoading={this.props.fetchVendorsLoading}
+
                 addVendor={this.props.addVendor}
                 uploadingNewVendor={this.props.uploadingNewVendor}
-                fetchVendorsLoading={this.props.fetchVendorsLoading}
                 errorAddingAVendor={this.props.errorAddingAVendor}
+
+                deleteVendor={this.props.deleteVendor}
                 deleteErrorAddingAVendor={this.props.deleteErrorAddingAVendor}
+
+                loadingUpdateVendor={this.props.loadingUpdateVendor}
+                updateVendor={this.props.updateVendor}
             />
         )
     }
@@ -27,14 +33,16 @@ const mapStateToProps = state => ({
     vendors: state.vendors.vendors,
     uploadingNewVendor: state.vendors.uploadingNewVendor,
     fetchVendorsLoading: state.vendors.fetchVendorsLoading,
-    errorAddingAVendor: state.vendors.errorAddingAVendor
+    errorAddingAVendor: state.vendors.errorAddingAVendor,
+    loadingUpdateVendor: state.vendors.loadingUpdateVendor
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchVendors: () => dispatch(Actions.fetchVendors()),
     deleteVendor: vendor => dispatch(Actions.deleteVendor(vendor)),
     addVendor: (vendor, vendors) => dispatch(Actions.addVendor(vendor, vendors)),
-    deleteErrorAddingAVendor: () => dispatch(Actions.errorAddingAVendor(false, ''))
+    deleteErrorAddingAVendor: () => dispatch(Actions.errorAddingAVendor(false, '')),
+    updateVendor: (vendorID, vendorFormData) => dispatch(Actions.updateVendor(vendorID, vendorFormData))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(VendorsContainer)

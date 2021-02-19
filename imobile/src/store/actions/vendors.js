@@ -21,18 +21,23 @@ export const errorAddingAVendor = (error, name) => ({
     name
 })
 
-
-export const fetchVendors = () =>
+export const fetchingVendors = () =>
     async dispatch => {
-        dispatch(setFetchVendorsLoading())
         const fetched = await fetch(Api.FETCH_VENDORS)
         const data = await fetched.json()
         const vendors = data.vendors.map(vendor => ({
             id: vendor._id,
             name: vendor.name,
-            image: `${Api.url}${vendor.image}`
+            image: `${Api.url}${vendor.image}`,
+            basicUrlImage: vendor.image
         }))
         dispatch(setVendors(vendors))
+    }
+
+export const fetchVendors = () =>
+    async dispatch => {
+        dispatch(setFetchVendorsLoading())
+        await dispatch(fetchingVendors())
         dispatch(setFetchVendorsLoading())
     }
 
@@ -42,8 +47,7 @@ export const deleteVendor = vendor =>
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${Actions.getJWT()}`
-            },
-            body: JSON.stringify(vendor.id)
+            }
         }
         await fetch(`${Api.DELETE_VENDOR}?id=${vendor.id}`, options)
 
@@ -72,4 +76,27 @@ export const addVendor = (vendor, vendors) =>
             await dispatch(fetchVendors())
         }
         dispatch(setUploadingNewVendor())
+    }
+
+export const loadingUpdateVendor = () => ({
+    type: ActionTypes.LOADING_UPDATE_VENDOR
+})
+
+export const updateVendor = (vendorID, vendorFormData) =>
+    async dispatch => {
+        dispatch(loadingUpdateVendor())
+        dispatch(setFetchVendorsLoading())
+
+        const options = {
+            method: 'PATCH',
+            headers: {
+                authorization: `Bearer ${Actions.getJWT()}`
+            },
+            body: vendorFormData
+        }
+        await fetch(`${Api.UPDATE_VENDOR}?id=${vendorID}`, options)
+
+        dispatch(fetchingVendors())
+        dispatch(loadingUpdateVendor())
+        dispatch(setFetchVendorsLoading())
     }

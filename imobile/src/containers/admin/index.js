@@ -11,7 +11,7 @@ import {useState} from 'react'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
 
-const AdminPanel = (props) => {
+const AdminPanel = props => {
     const [viewNavbar, setViewNavbar] = useState(false)
     const contentStyles = [
         styles.wrapper,
@@ -52,7 +52,7 @@ const AdminPanel = (props) => {
                     </>
                 )
             }
-            <Box className={contentStyles}>
+            <Box className={contentStyles} height='100%' >
                 <Switch>
                     {
                         props.haveToken ? null :
@@ -67,7 +67,7 @@ const AdminPanel = (props) => {
                         exact
                     />
                     <Route
-                        path={pagesPathnames.ADMIN}
+                        path={pagesPathnames.CRM || pagesPathnames.ADMIN}
                         component={() => <div>admin page</div>}
                     />
                 </Switch>

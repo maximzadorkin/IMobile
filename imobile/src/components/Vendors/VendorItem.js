@@ -1,5 +1,5 @@
 import {
-    Avatar,
+    Avatar, Box,
     Collapse,
     IconButton,
     ListItem,
@@ -10,16 +10,20 @@ import {
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import uniqid from 'uniqid'
-import UpdateVendor from '../UpdateVendor/UpdateVendor'
+import UpdateVendor from './UpdateVendor'
 import {useState} from 'react'
+import Loading from '../Loading/Loading'
 
-const VendorItem = ({vendor, deleteVendor, fetchVendorsLoading}) => {
+const VendorItem = ({vendor, deleteVendor, fetchVendorsLoading, loadingUpdateVendor, updateVendor}) => {
     const [viewUpdater, setViewUpdater] = useState(false)
     return (
         <>
             <ListItem divider key={uniqid()}>
                 <ListItemAvatar>
-                    <Avatar alt={vendor.name} src={vendor.image}/>
+                    <Avatar
+                        alt={vendor.name}
+                        src={vendor.image}
+                    />
                 </ListItemAvatar>
                 <ListItemText primary={vendor.name}/>
                 <ListItemSecondaryAction>
@@ -40,9 +44,14 @@ const VendorItem = ({vendor, deleteVendor, fetchVendorsLoading}) => {
                 </ListItemSecondaryAction>
             </ListItem>
             <Collapse in={viewUpdater}>
-                <UpdateVendor
-                    vendor={vendor}
-                />
+                <Box position='relative'>
+                    {loadingUpdateVendor && <Loading />}
+                    <UpdateVendor
+                        vendor={vendor}
+                        loadingUpdateVendor={loadingUpdateVendor}
+                        updateVendor={updateVendor}
+                    />
+                </Box>
             </Collapse>
         </>
     )

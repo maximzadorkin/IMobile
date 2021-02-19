@@ -4,7 +4,8 @@ const initialState = {
     vendors: [],
     uploadingNewVendor: false,
     fetchVendorsLoading: false,
-    errorAddingAVendor: {error: false, name: ''}
+    errorAddingAVendor: {error: false, name: ''},
+    loadingUpdateVendor: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,8 @@ const reducer = (state = initialState, action) => {
                     name: action.name
                 }
             }
+        case ActionTypes.LOADING_UPDATE_VENDOR:
+            return {...state, loadingUpdateVendor: !state.loadingUpdateVendor}
         default:
             return state
     }
